@@ -1,4 +1,4 @@
-from Phase1 import fibonacci
+from Phase1 import fibonacci1
 from unittest_data_provider import data_provider
 
 
@@ -10,5 +10,5 @@ class TestFibonacci():
 
     @data_provider(data)
     def test_fibonacci(self, num, result):
-        test = fibonacci.fib(num)
+        test = fibonacci1.fib(num)
         assert (result == test)
