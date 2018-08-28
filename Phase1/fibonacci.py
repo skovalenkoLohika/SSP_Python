@@ -6,11 +6,10 @@ def main():
         print('you have inputted wrong number')
 
 
-
 def fib(num):
     fibo = [0, 1]
     if type(num) == int:
-        if num >=2:
+        if num >= 2:
             for i in range(num):
                 fibo.append(fibo[-2] + fibo[-1])
             return fibo
