@@ -13,16 +13,16 @@ class Api:
     update_issue_url = 'http://jira.hillel.it:8080/rest/api/2/issue/'
 
     def create_issue(self, json_data):
-        r = requests.post(self.create_issue_url, headers=self.HEADER, data=json_data)
-        if r.status_code == 201:
+        response = requests.post(self.create_issue_url, headers=self.HEADER, data=json_data)
+        if response.status_code == 201:
             print('isuue was successful created')
-            return [r.status_code, r.json().get("id")]
+            return response
         else:
-            print('Status code:' + str(r.status_code)+str(r.text))
+            print('Status code:' + str(response.status_code)+str(response.text))
 
     def login(self, user_name, password):
-        r = requests.get(self.search_issue_url, auth=(user_name, password))
-        return r.status_code
+        response = requests.get(self.search_issue_url, auth=(user_name, password))
+        return response.status_code
 
     # def search_issue(self, search_parameters):
     #     r = requests.get(create_issue_url + search_parameters, auth=(USER_NAME, PASSWORD))

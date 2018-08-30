@@ -4,14 +4,14 @@ import json
 class JsonGenerator:
 
     @staticmethod
-    def create_issue(self, summary_id):
+    def create_issue(self, summary_id=""):
         jira = \
             {"fields": {
                 "project":
                     {
-                        "key": "AQAPYTHON"
+                        "key": "AQAPYTHON1"
                     },
-                "summary": "Serge"+summary_id,
+                "summary": summary_id,
                 "description": "random_desc",
                 "issuetype": {
                     "name": "Bug"
