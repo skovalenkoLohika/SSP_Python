@@ -4,7 +4,7 @@ import json
 class JsonGenerator:
 
     @staticmethod
-    def create_issue(self, summary_id=""):
+    def create_issue(summary_id=""):
         jira = \
             {"fields": {
                 "project":
@@ -19,15 +19,7 @@ class JsonGenerator:
         return json.dumps(jira)
 
     @staticmethod
-    def update_issue(self, description="new summary form K"):
-        jira = {
-            "update": {
-                "description": [
-                    {
-                        "set": description
-                    }
-                ],
-                "comment": [
-                    {
-                        "add": {
-                            "body": "Body"}}]}}
+    def update_issue(field, value):
+        jira = {"fields": {field: value}}
+        return jira
+

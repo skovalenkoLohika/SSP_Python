@@ -18,39 +18,45 @@ class TestApi:
         (WRONG_PASSWORD, PASSWORD, 401),
     ])
     def test_login(self, user_name, password, expected_code):
-        assert request.login(user_name, password) == expected_code
+        assert expected_code == request.login(user_name, password)
 
     @pytest.mark.parametrize("summary, code", [
-        # ('Serg_Summary1', 201),
-        # ('Serg_Summary2', 201),
-        # ('Serg_Summary3', 201),
-        (0, 400),
+        ('Serg_Summary1', 201),
+        ('Serg_Summary2', 201),
+        ('Serg_Summary3', 201),
+        ('', 400),
         ('summary' * 45, 400),
     ])
     def test_create_issue(self, summary, code):
-        response = request.create_issue(JsonGenerator.create_issue(self, summary))
-        print(response)
+        response = request.create_issue(JsonGenerator.create_issue(summary))
         assert response.status_code == code
         if code == 201:
             self.id_issue.append(response.json().get("key"))
         print(self.id_issue)
 
-    def test_update_issue(self):
-        response = request.create_issue(JsonGenerator.create_issue(self))
-        self.id_issue = response.json().get("key")
-
     # search by id
+    @pytest.mark.dependsy(depends=["test_create_issue"])
     def test_search_issue(self):
         response = request.search_issue('id=' + self.id_issue[0])
         assert response.status_code == 200
 
     # search by reporter
+    @pytest.mark.dependsy(depends=["test_create_issue"])
     def test_search_issue(self):
         response = request.search_issue('reporter=' + self.USER_NAME)
         assert response.status_code == 200
+
+
+    @pytest.mark.parametrize("field, value", [
+         ('summary', 'Serg_new_summary'),
+         ('priority', 'High'),
+    ])
+    @pytest.mark.dependsy(depends=["test_create_issue"])
+    def test_update_issue(self, field, value):
+        response = request.update_issue(self.id_issue[0], JsonGenerator.update_issue(field, value))
+
 
     def teardown_class(self):
         if len(self.id_issue) > 0:
             for i in range(len(self.id_issue)):
                 request.delete_issue(self.id_issue[i])
-

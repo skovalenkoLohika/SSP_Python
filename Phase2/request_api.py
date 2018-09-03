@@ -5,20 +5,16 @@ class Api:
     # credentials:
     USER_NAME = 'Kovalenko_Sergey'
     PASSWORD = 'Kov@lenko6'
-    HEADER = {'Authorization': 'Basic S292YWxlbmtvX1NlcmdleTpLb3ZAbGVua282==', 'Content-Type': 'application/json'}
+    HEADER = {'Authorization': 'Basic S292YWxlbmtvX1NlcmdleTpLb3ZAbGVua282==',
+              'Content-Type': 'application/json'}
 
     # URLs:
     issue_url = 'http://jira.hillel.it:8080/rest/api/2/issue/'
     search_issue_url = 'http://jira.hillel.it:8080/rest/api/2/search?jql='
 
-
     def create_issue(self, json_data):
         response = requests.post(self.issue_url, headers=self.HEADER, data=json_data)
-        if response.status_code == 201:
-            print('isuue was successful created')
-            return response
-        else:
-            print('Status code:' + str(response.status_code)+str(response.text))
+        return response
 
     def delete_issue(self, issue_id):
         response = requests.delete(self.issue_url + issue_id, headers=self.HEADER)
@@ -28,12 +24,17 @@ class Api:
             print('Status code:' + str(response.status_code)+str(response.text))
 
     def login(self, user_name, password):
-        response = requests.get(self.issue_url, auth=(user_name, password))
+        response = requests.get(self.search_issue_url, auth=(user_name, password))
         return response.status_code
 
     def search_issue(self, search_parameters):
         response = requests.get(self.search_issue_url + search_parameters, auth=(self.USER_NAME, self.PASSWORD))
         return response
 
-    def update_issue(self, issue_id,json_data):
-        r = requests.put(self.update_issue_url+issue_id, headers=self.HEADER, data=json_data)
+    def update_issue(self, issue_id, json_data):
+        response = requests.put(self.issue_url+issue_id, headers=self.HEADER, data=json_data)
+        return response
+
+    def login(self, id_issue):
+        response = requests.get(self.issue_url + id_issue, auth=(self.user_name, self.password))
+        return response
