@@ -9,7 +9,7 @@ class JsonGenerator:
             {"fields": {
                 "project":
                     {
-                        "key": "AQAPYTHON1"
+                        "key": "AQAPYTHON"
                     },
                 "summary": summary_id,
                 "description": "random_desc",
