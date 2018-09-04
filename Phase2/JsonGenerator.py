@@ -21,5 +21,5 @@ class JsonGenerator:
     @staticmethod
     def update_issue(field, value):
         jira = {"fields": {field: value}}
-        return jira
+        return json.dumps(jira)
 

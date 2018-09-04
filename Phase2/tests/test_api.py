@@ -56,11 +56,12 @@ class TestApi:
 
     @pytest.mark.parametrize("field, value", [
          ('summary', 'Serg_new_summary'),
-         ('priority', 'High'),
+         ('description', 'Serg_new_description'),
     ])
     @pytest.mark.dependsy(depends=["test_create_issue"])
     def test_update_issue(self, field, value):
         response = request.update_issue(self.id_issue[0], JsonGenerator.update_issue(field, value))
+        assert 204 == response.status_code
 
 
     def teardown_class(self):
@@ -68,5 +69,3 @@ class TestApi:
             for i in range(len(self.id_issue)):
                 request.delete_issue(self.id_issue[i])
 
-    def test_teardown_cladss(self):
-        request.delete_issue("AQAPYTHON-1961")
