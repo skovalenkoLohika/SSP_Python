@@ -1,6 +1,6 @@
 import pytest
-from api.request_api import Api
-from JsonGenerator import *
+from Phase2.api.request_api import Api
+from Phase2.JsonGenerator import *
 
 request = Api()
 
