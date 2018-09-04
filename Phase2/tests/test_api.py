@@ -1,6 +1,6 @@
 import pytest
-from .request_api import *
-from .JsonGenerator import *
+from request_api import *
+from JsonGenerator import *
 
 request = Api()
 
@@ -67,3 +67,6 @@ class TestApi:
         if len(self.id_issue) > 0:
             for i in range(len(self.id_issue)):
                 request.delete_issue(self.id_issue[i])
+
+    def test_teardown_cladss(self):
+        request.delete_issue("AQAPYTHON-1961")
