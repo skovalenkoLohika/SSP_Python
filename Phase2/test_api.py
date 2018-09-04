@@ -40,11 +40,18 @@ class TestApi:
         response = request.search_issue('id=' + self.id_issue[0])
         assert response.status_code == 200
 
+    # search by absent id
+    @pytest.mark.dependsy(depends=["test_create_issue"])
+    def test_search_issue(self):
+        response = request.search_issue('id=12345678')
+        assert response.status_code == 400
+
     # search by reporter
     @pytest.mark.dependsy(depends=["test_create_issue"])
     def test_search_issue(self):
         response = request.search_issue('reporter=' + self.USER_NAME)
         assert response.status_code == 200
+        assert 3 == len(response.json().get("issues"))
 
 
     @pytest.mark.parametrize("field, value", [
