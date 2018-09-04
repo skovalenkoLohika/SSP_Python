@@ -35,6 +35,3 @@ class Api:
         response = requests.put(self.issue_url+issue_id, headers=self.HEADER, data=json_data)
         return response
 
-    def login(self, id_issue):
-        response = requests.get(self.issue_url + id_issue, auth=(self.user_name, self.password))
-        return response
