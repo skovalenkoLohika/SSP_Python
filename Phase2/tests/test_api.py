@@ -1,5 +1,5 @@
 import pytest
-from request_api import *
+from api.request_api import *
 from JsonGenerator import *
 
 request = Api()
