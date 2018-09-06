@@ -49,7 +49,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest Phase2\tests\test_api.py -v -s -n 4
+            pytest SSP_Python\Phase2\tests\test_api.py -v -s -n 4
 
       - store_artifacts:
           path: test-reports
