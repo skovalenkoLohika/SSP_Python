@@ -4,9 +4,8 @@ import json
 class JsonGenerator:
 
     @staticmethod
-    def create_issue(summary_id=""):
-        jira = \
-            {"fields": {
+    def create_issue(summary_id=''):
+        jira = {"fields": {
                 "project":
                     {
                         "key": "AQAPYTHON"
