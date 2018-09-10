@@ -1,4 +1,4 @@
-from Phase1 import fibonacci
+import fibonacci
 from unittest_data_provider import data_provider
 
 

@@ -1,10 +1,8 @@
 import requests
-
+from variables import *
 
 class Api:
     # credentials:
-    USER_NAME = 'Kovalenko_Sergey'
-    PASSWORD = 'Kov@lenko6'
     HEADER = {'Authorization': 'Basic S292YWxlbmtvX1NlcmdleTpLb3ZAbGVua282==',
               'Content-Type': 'application/json'}
 
@@ -28,7 +26,7 @@ class Api:
         return response.status_code
 
     def search_issue(self, search_parameters):
-        response = requests.get(self.search_issue_url + search_parameters, auth=(self.USER_NAME, self.PASSWORD))
+        response = requests.get(self.search_issue_url + search_parameters, auth=(USER_NAME, PASSWORD))
         return response
 
     def update_issue(self, issue_id, json_data):

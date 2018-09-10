@@ -1,20 +1,16 @@
 import pytest
-from Phase2.api.request_api import Api
-from Phase2.JsonGenerator import *
+from request_api import Api
+from JsonGenerator import *
+from variables import *
 
 request = Api()
 
 
 class TestApi:
-    USER_NAME = 'Kovalenko_Sergey'
-    PASSWORD = 'Kov@lenko6'
-    WRONG_USER = 'Kovalenko_S'
-    WRONG_PASSWORD = 'KovalenkoS'
+
     id_issue = []
     i = 1
     summary = ['Serg_Summary1', 'Serg_Summary2']
-
-
 
     def setup_class(self):
         for i in self.summary:
@@ -27,7 +23,6 @@ class TestApi:
         if len(self.id_issue) > 0:
             for i in self.id_issue:
                 request.delete_issue(i)
-
 
     @pytest.mark.parametrize("user_name,password, expected_code", [
         (USER_NAME, PASSWORD, 200),
@@ -61,7 +56,7 @@ class TestApi:
 
     # search by reporter
     def test_search_issue(self):
-        response = request.search_issue('reporter=' + self.USER_NAME)
+        response = request.search_issue('reporter=' + USER_NAME)
         assert response.status_code == 200
         assert 2 <= len(response.json().get("issues"))
 
