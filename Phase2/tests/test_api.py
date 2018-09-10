@@ -29,10 +29,6 @@ class TestApi:
                 request.delete_issue(i)
 
 
-    def test_te(self):
-        assert 2 is 2
-
-
     @pytest.mark.parametrize("user_name,password, expected_code", [
         (USER_NAME, PASSWORD, 200),
         (PASSWORD, WRONG_USER, 401),
