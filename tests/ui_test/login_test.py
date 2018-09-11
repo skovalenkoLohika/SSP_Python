@@ -3,6 +3,8 @@ from pages.loginPage import *
 from variables import *
 
 login = LoginPage()
+
+
 class Login:
 
     @pytest.mark.parametrize("username,password", [
