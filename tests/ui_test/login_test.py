@@ -5,7 +5,11 @@ from variables import *
 login = LoginPage()
 
 
+@pytest.mark.usefixtures("driver_init")
 class Login:
+
+
+
 
     @pytest.mark.parametrize("username,password", [
         (USER_NAME, PASSWORD),

@@ -1,12 +1,17 @@
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pytest
-from driver import Driver
+from conftest import Driver
 
 
 class Helpers(Driver):
+    driverPath = "WebDrivers/chromedriver_win.exe"
+    driver = WebDriver
+    wait = WebDriverWait(driver, 10)
 
-    driver = super().driver
+    def waitForVisible(self, element):
+        return self.wait.until(EC.visibility_of_element_located(element))
 
-    def click_when_clicable(self, element):
-        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(element)).click()
+    def clickWhenClicable(self, element):
+        self.wait.until(EC.element_to_be_clickable(element)).click()
