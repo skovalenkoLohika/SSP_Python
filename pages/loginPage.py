@@ -12,5 +12,7 @@ class LoginPage(Base):
     def login(self, username, password):
         self.wait_for_visible(self.username_field).send_keys(username)
         self.wait_for_visible(self.password_field).send_keys(password)
-        self.click_when_clicable(self.login_button)
-        return self.create_button
+        self.click_when_clickable(self.login_button)
+        return self.wait_for_visible(self.create_button)
+
+

@@ -9,10 +9,12 @@ class TestLogin:
     @pytest.mark.parametrize("username, password", [
         (PASSWORD, WRONG_USER),
         (WRONG_PASSWORD, PASSWORD),
-        (USER_NAME, PASSWORD)
     ])
+    @pytest.mark.xfail(strict=True)
     def test_login(self, username, password):
         login = LoginPage(self.driver)
-        create_button = login.login(username, password)
-        assert create_button is not None
+        login.login(username, password)
 
+    def test_login(self):
+        login = LoginPage(self.driver)
+        login.login(USER_NAME, PASSWORD)
