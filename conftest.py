@@ -10,6 +10,7 @@ def driver_setup(request):
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
     options.add_argument("--test-type")
+    options.add_argument("start-maximized")
     if os.name == "nt":
         driver_path = "../../WebDrivers/chromedriver_win.exe"
     else:

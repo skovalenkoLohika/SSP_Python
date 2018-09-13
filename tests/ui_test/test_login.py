@@ -1,4 +1,6 @@
 import pytest
+
+
 from pages.loginPage import LoginPage
 from variables import *
 
@@ -7,14 +9,14 @@ from variables import *
 class TestLogin:
 
     @pytest.mark.parametrize("username, password", [
-        (PASSWORD, WRONG_USER),
-        (WRONG_PASSWORD, PASSWORD),
+        (WRONG_USER, PASSWORD),
+        (USER_NAME, WRONG_PASSWORD)
     ])
-    @pytest.mark.xfail(strict=True)
-    def test_login(self, username, password):
+    def test_login_failed(self, username, password):
         login = LoginPage(self.driver)
-        login.login(username, password)
+        login.login_failed(username, password)
 
     def test_login(self):
         login = LoginPage(self.driver)
         login.login(USER_NAME, PASSWORD)
+
