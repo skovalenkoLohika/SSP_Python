@@ -1,20 +1,16 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.keys import *
-from selenium.webdriver.support import expected_conditions as EC
-from helpers import Helpers
+from base import Base
 
 
 class LoginPage(Base):
-    driver = super().driver
 
-    username = (By.ID, 'login-form-username')
-    password = (By.ID, 'login-form-password')
+    username_field = (By.ID, 'login-form-username')
+    password_field = (By.ID, 'login-form-password')
     create_button = (By.ID, "create_link")
     login_button = (By.ID, "login-form-submit")
 
     def login(self, username, password):
-        self.waitForVisible.send_keys(username)
-        self.waitForVisible.  send_keys(password)
-        self.login_button.click()
+        self.wait_for_visible(self.username_field).send_keys(username)
+        self.wait_for_visible(self.password_field).send_keys(password)
+        self.click_when_clicable(self.login_button)
         return self.create_button

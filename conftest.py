@@ -11,7 +11,7 @@ def driver_setup(request):
     options.add_argument('--ignore-certificate-errors')
     options.add_argument("--test-type")
     if os.name == "nt":
-        driver_path = "WebDrivers/chromedriver_win.exe"
+        driver_path = "../../WebDrivers/chromedriver_win.exe"
     else:
         driver_path = "WebDrivers/chromedriver_linux"
     try:
