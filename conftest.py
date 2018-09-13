@@ -14,7 +14,7 @@ def driver_setup(request):
     if os.name == "nt":
         driver_path = "../../WebDrivers/chromedriver_win.exe"
     else:
-        driver_path = "WebDrivers/chromedriver_linux"
+        driver_path = "../../WebDrivers/chromedriver_linux"
     try:
         driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
         driver.get("http://jira.hillel.it:8080/login.jsp")
