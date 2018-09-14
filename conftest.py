@@ -4,7 +4,7 @@ from selenium import webdriver
 import pytest
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="session")
 def driver_setup(request):
     driver = None
     options = webdriver.ChromeOptions()
