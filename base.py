@@ -5,8 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Base:
 
-    def __init__(self, driver: WebDriver):
-        self.driver  = driver
+    def __init__(self, driver):
+        self.driver: WebDriver = driver
         self.wait = WebDriverWait(self.driver, 10)
 
     def wait_for_visible(self, locator):
