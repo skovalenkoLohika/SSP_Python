@@ -15,4 +15,7 @@ class Base:
     def click_when_clickable(self, locator):
         self.wait.until(EC.element_to_be_clickable(locator)).click()
 
+    def wait_for_invisible(self, locator):
+        self.wait.until(EC.invisibility_of_element_located(locator))
+
 

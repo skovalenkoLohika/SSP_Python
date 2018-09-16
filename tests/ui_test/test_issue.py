@@ -28,9 +28,10 @@ class TestIssues:
     @pytest.mark.parametrize("summary, error_message", [
         ('', "You must specify a summary of the issue."),
         ('Serg'*25, "Summary must be less than 255 characters.")])
-    def test_create_issue(self,summary,error_message):
+    def test_create_issue_incorrect_summary(self, summary, error_message):
         issue = IssuePage(self.driver)
         message = issue.create_incorrect_issue(summary)
+        assert (error_message == message.gettext())
 
     ## with all required fields#
     def test_create_issue(self, summary="Serg_Summary4"):
@@ -39,9 +40,13 @@ class TestIssues:
 
 
 
-    # find one issue find 5  issues  find issue “no results”
-    def test_search_issue(self):
-        pass
+    # find one issue find 5  issues 
+    @pytest.mark.parametrize("summary, search_result", [
+        ('summary ~Serg_Summary4', 1),
+        ('summary ~ Serg', 4)])
+    def test_search_issue(self, summary, search_result):
+        issue = IssuePage(self.driver)
+        assert (issue.search_issue() == search_result)
 
     def test_update_issue(self):
         pass
