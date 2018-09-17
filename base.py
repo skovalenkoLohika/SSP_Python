@@ -7,7 +7,7 @@ class Base:
 
     def __init__(self, driver):
         self.driver: WebDriver = driver
-        self.wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 15)
 
     def wait_for_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
