@@ -8,9 +8,6 @@ request = Api()
 @pytest.mark.usefixtures("driver_setup")
 class TestIssues:
 
-    id_issue =[]
-
-
    # prepare issues for search
    #  @pytest.mark.parametrize("summary", [
    #      ('Serg_Summary1'),
@@ -43,7 +40,9 @@ class TestIssues:
     # find one issue find 5  issues 
     @pytest.mark.parametrize("summary, search_result", [
         ('summary ~Serg_Summary4', 1),
-        ('summary ~ Serg', 4)])
+        ('summary ~ Serg', 4),
+        ('summary ~ Serg1111', 0),
+    ])
     def test_search_issue(self, summary, search_result):
         issue = IssuePage(self.driver)
         assert (issue.search_issue() == search_result)

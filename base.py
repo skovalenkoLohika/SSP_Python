@@ -19,3 +19,4 @@ class Base:
         self.wait.until(EC.invisibility_of_element_located(locator))
 
 
+
