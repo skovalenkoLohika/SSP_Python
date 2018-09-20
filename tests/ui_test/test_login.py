@@ -5,7 +5,7 @@ from pages.loginPage import LoginPage
 from variables import *
 
 
-@pytest.mark.usefixtures("driver_setup")
+# @pytest.mark.usefixtures("driver_setup")
 class TestLogin:
 
     @pytest.mark.parametrize("username, password, expected_result", [

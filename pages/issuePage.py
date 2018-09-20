@@ -17,35 +17,59 @@ class IssuePage(Base):
     _search_for_issues = (By.CLASS_NAME, "Search for issues")
     _advanced_search_field = (By.ID, "advanced-search")
     _issue_list = (By.CSS_SELECTOR, "li[title]")
-    _searching_process =(By.CSS_SELECTOR, "div[class=loading]")
+    _searching_process = (By.CSS_SELECTOR, "div[class=loading]")
     _issue_created = (By.CSS_SELECTOR, "a[class^=issue-created]")
+    _issue_summary = (By.ID, "summary-val")
+    _issue_priority = (By.ID, "priority-val")
+    _issue_assigner = (By.ID, "assignee-val")
+    _cancel_button = (By.CSS_SELECTOR, "a[class='cancel']")
+    two_elements = (By.CSS_SELECTOR, "a[class^=issue-created], div[class=error]")
+
+    message = None
 
     def create_issue(self, summary):
         self.click_when_clickable(self._create_button)
         self.wait_for_visible(self._summary_field).send_keys(summary)
         self.click_when_clickable(self._create_issue_submit)
         try:
-            self.wait_for_visible(self._issue_created)
-            return self.driver.find_element(self._issue_created).text
+            self.message = self.wait_for_visible(self._issue_created)
+            message_attrs = {'text': self.message.text, 'data-issue-key': self.message.get_attribute('data-issue-key')}
         except TimeoutException:
-            ttt = self.driver.find_element(self._error_message).text
-            return ttt
+            self.message = self.wait_for_visible(self._error_message)
+            message_attrs = {'text': self.message.text, 'data-issue-key': self.message.get_attribute('data-issue-key')}
+            self.click_when_clickable(self._cancel_button)
+            self.wait_for_alert()
+            alert = self.driver.switch_to.alert
+            alert.accept()
+        return message_attrs
 
-
-
-
-    # def create_incorrect_issue(self, summary):
-    #     self.click_when_clickable(self._create_button)
-    #     self.wait_for_visible(self._summary_field).send_keys(summary)
-    #     self.click_when_clickable(self._create_issue_submit)
-    #     return self.wait_for_visible(self._error_message)
 
     def search_issue(self, search_parameter):
         self.click_when_clickable(self._issue_button)
         self.click_when_clickable(self._search_for_issues)
         self.wait_for_visible(self._advanced_search_field).clear().send_keys(search_parameter).send_keys(Keys.ENTER)
         self.wait_for_invisible(self._searching_process)
-        return self.driver.find_elements(self._issue_list).count()
+        return self.wait_for_visible_elements(self._issue_list).count()
+
+    def update_issue(self, issue, summary="summary", priority="High", assigner="Kovalenko Sergey"):
+        result = []
+        self.search_issue(issue)
+        self.wait_for_visible_elements(self._issue_list)
+        self.wait_for_visible(self._issue_summary).clear().send_keys(summary)
+        self.wait_for_visible(self._issue_priority).clear().send_keys(priority)
+        self.wait_for_visible(self._issue_assigner).clear().\
+            send_keys(assigner).send_keys(Keys.ENTER).send_keys(Keys.ENTER)
+        self.search_issue(issue)
+        self.wait_for_visible_elements(self._issue_list)
+        result.append(self.wait_for_visible(self._issue_summary).text)
+        result.append(self.wait_for_visible(self._issue_priority).text)
+        result.append(self.wait_for_visible(self._issue_assigner).text)
+        return result
+
+
+
+
+
 
 
 
