@@ -35,10 +35,10 @@ class TestIssues(DriverSetup):
     def test_create_issue(self, summary, expected_message):
         issue = IssuePage(self.driver)
         message = issue.create_issue(summary)
-        print ('message={}'.format(message))
+        print('message={}'.format(message))
         if message['data-issue-key'] is not None:
-            self.id_issue.add(message['data-issue-key'])
-        assert expected_message in message['text'], ''
+            self.id_issue.append(message['data-issue-key'])
+        assert expected_message in message['text']
 
 
     # find one issue find 5  issues

@@ -1,6 +1,6 @@
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from time import sleep
 
 from base import Base
 
@@ -23,26 +23,22 @@ class IssuePage(Base):
     _issue_priority = (By.ID, "priority-val")
     _issue_assigner = (By.ID, "assignee-val")
     _cancel_button = (By.CSS_SELECTOR, "a[class='cancel']")
-    two_elements = (By.CSS_SELECTOR, "a[class^=issue-created], div[class=error]")
-
-    message = None
+    _two_elements = (By.CSS_SELECTOR, "a[class^=issue-created], div[class=error]")
+    _create_issue_dialog = (By.ID, "create-issue-dialog")
 
     def create_issue(self, summary):
         self.click_when_clickable(self._create_button)
         self.wait_for_visible(self._summary_field).send_keys(summary)
         self.click_when_clickable(self._create_issue_submit)
-        try:
-            self.message = self.wait_for_visible(self._issue_created)
-            message_attrs = {'text': self.message.text, 'data-issue-key': self.message.get_attribute('data-issue-key')}
-        except TimeoutException:
-            self.message = self.wait_for_visible(self._error_message)
-            message_attrs = {'text': self.message.text, 'data-issue-key': self.message.get_attribute('data-issue-key')}
+        message = self.wait_for_visible(self._two_elements)
+        message_attrs = {'text': message.text, 'data-issue-key': message.get_attribute('data-issue-key')}
+        if message.get_attribute('class') == 'error':
             self.click_when_clickable(self._cancel_button)
             self.wait_for_alert()
             alert = self.driver.switch_to.alert
             alert.accept()
+            sleep(1)
         return message_attrs
-
 
     def search_issue(self, search_parameter):
         self.click_when_clickable(self._issue_button)
