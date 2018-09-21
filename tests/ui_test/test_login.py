@@ -1,12 +1,13 @@
 import pytest
-
-
 from pages.loginPage import LoginPage
 from variables import *
+from driver import DriverSetup
 
 
-# @pytest.mark.usefixtures("driver_setup")
-class TestLogin:
+class TestLogin(DriverSetup):
+
+    def setup_class(self):
+        self.driver = self.driver_setup(self)
 
     @pytest.mark.parametrize("username, password, expected_result", [
         (WRONG_USER, PASSWORD, False),
@@ -17,3 +18,5 @@ class TestLogin:
         result = login.login(username, password)
         assert (result == expected_result)
 
+    def teardown_class(self):
+        self.driver.close()

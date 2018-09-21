@@ -7,7 +7,6 @@ from driver import DriverSetup
 request = Api()
 
 
-# @pytest.mark.usefixtures("driver_setup")
 class TestIssues(DriverSetup):
     id_issue = []
 
@@ -60,11 +59,11 @@ class TestIssues(DriverSetup):
         assert new_priority in result
         assert assignee in result
 
-
     def teardown_class(self):
         if len(self.id_issue) > 0:
             for i in self.id_issue:
                 request.delete_issue(i)
+        self.driver.close()
 
 
 
