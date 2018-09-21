@@ -4,24 +4,23 @@ from request_api import Api
 from pages.issuePage import IssuePage
 from pages.loginPage import LoginPage
 from driver import DriverSetup
+from JsonGenerator import JsonGenerator
 request = Api()
 
 
 class TestIssues(DriverSetup):
-    id_issue = []
 
-   # prepare issues for search
-   #  @pytest.mark.parametrize("summary", [
-   #      ('Serg_Summary1'),
-   #      ('Serg_Summary2'),
-   #      ('Serg_Summary3')])
+    id_issue = []
+    summary = ['Serg_Summary1', 'Serg_Summary2', 'Serg_Summary3']
+
     def setup_class(self):
         self.driver = self.driver_setup(self)
         login = LoginPage(self.driver)
         login.login(USER_NAME, PASSWORD)
-        # response = request.create_issue(JsonGenerator.create_issue(summary))
-        # response.status_code == 201
-        # self.id_issue.append(response.json().get("key"))
+        for i in self.summary:
+            response = request.create_issue(JsonGenerator.create_issue(i))
+            response.status_code == 201
+            self.id_issue.append(response.json().get("key"))
 
 
 
