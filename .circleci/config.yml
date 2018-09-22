@@ -49,7 +49,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest -v -n 4 --ignore Phase1
+            pytest -vv --ignore test_apy.py ,tes_fibonacci.py
 
       - store_artifacts:
           path: test-reports
