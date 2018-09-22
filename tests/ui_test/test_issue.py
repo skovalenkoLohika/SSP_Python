@@ -19,8 +19,8 @@ class TestIssues(DriverSetup):
         login.login(USER_NAME, PASSWORD)
         for i in self.summary:
             response = request.create_issue(JsonGenerator.create_issue(i))
-            response.status_code == 201
-            self.id_issue.append(response.json().get("key"))
+            if response.status_code == 201:
+                self.id_issue.append(response.json().get("key"))
 
 
 
@@ -39,16 +39,16 @@ class TestIssues(DriverSetup):
         assert expected_message in message['text']
 
 
-    # find one issue find 5  issues
+    # find one issue
     @pytest.mark.parametrize("summary, search_result", [
-        ('summary ~Serg_Summary4', 1),
-        ('summary ~ Serg', 4),
-        ('summary ~ Serg1111', 0)])
+       ('Serg_Summary1', 1),
+       ('Serg_Summary*', 4),
+        ('Serg111111', 0)])
     def test_search_issue(self, summary, search_result):
         issue = IssuePage(self.driver)
         assert (issue.search_issue(summary) == search_result)
 
-    def test_update_issue(self, search_issue="summary ~Serg_Summary",
+    def test_update_issue(self, search_issue="Serg_Summary1",
                          new_summary="Serg_Summary5",
                          new_priority='High',
                          assignee="Kovalenko Sergey"):
