@@ -1,7 +1,7 @@
 import pytest
-from request_api import Api
-from JsonGenerator import *
-from variables import *
+from tests.request_api import Api
+from tests.JsonGenerator import *
+from tests.variables import *
 
 request = Api()
 

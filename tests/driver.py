@@ -12,9 +12,9 @@ class DriverSetup:
         options.add_argument("--test-type")
         options.add_argument("start-maximized")
         if os.name == "nt":
-            driver_path = "../../WebDrivers/chromedriver_win.exe"
+            driver_path = ".\\WebDrivers\\chromedriver_win.exe"
         else:
-            driver_path = "../../WebDrivers/chromedriver_linux"
+            driver_path = "./WebDrivers/chromedriver_linux"
         try:
             self.driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
             self.driver.get("http://jira.hillel.it:8080/login.jsp")

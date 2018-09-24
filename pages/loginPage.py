@@ -1,6 +1,5 @@
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from base import Base
+from tests.base import Base
 
 
 class LoginPage(Base):

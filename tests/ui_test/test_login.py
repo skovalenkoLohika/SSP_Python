@@ -1,7 +1,7 @@
 import pytest
 from pages.loginPage import LoginPage
-from variables import *
-from driver import DriverSetup
+from tests.variables import *
+from tests.driver import DriverSetup
 
 
 class TestLogin(DriverSetup):

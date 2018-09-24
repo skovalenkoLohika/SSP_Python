@@ -1,5 +1,5 @@
 import requests
-from variables import *
+from tests.variables import *
 
 class Api:
     # credentials:

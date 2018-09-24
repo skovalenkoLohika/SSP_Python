@@ -1,10 +1,10 @@
 import pytest
-from variables import *
-from request_api import Api
+from tests.variables import *
+from tests.request_api import Api
 from pages.issuePage import IssuePage
 from pages.loginPage import LoginPage
-from driver import DriverSetup
-from JsonGenerator import JsonGenerator
+from tests.driver import DriverSetup
+from tests.JsonGenerator import JsonGenerator
 request = Api()
 
 
