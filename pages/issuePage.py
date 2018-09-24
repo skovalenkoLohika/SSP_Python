@@ -75,6 +75,7 @@ class IssuePage(Base):
         summary_field.send_keys(summary)
         summary_field.send_keys(Keys.ENTER)
         self.click_when_clickable(self._issue_priority)
+        self.wait_for_visible(self._priority_field)
         priority_field = self.wait_for_when_clickable(self._priority_field)
         priority_field.click()
         priority_field.clear()
