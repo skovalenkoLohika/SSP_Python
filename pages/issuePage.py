@@ -19,7 +19,7 @@ class IssuePage(Base):
     _issue_button = (By.ID, "find_link")
     _search_for_issues = (By.ID, "issues_new_search_link_lnk")
     _advanced_search_field = (By.ID, "advanced-search")
-    _issue_list = (By.CSS_SELECTOR, "li[title]")
+    _issue_list = (By.CLASS_NAME, "issue-list")
     _search_result = (By.CSS_SELECTOR, "p[class=no-results-hint], ol[class=issue-list]")
     _searching_process = (By.CSS_SELECTOR, "div[class=loading]")
     _issue_created = (By.CSS_SELECTOR, "a[class^=issue-created]")
@@ -57,7 +57,7 @@ class IssuePage(Base):
         search_field = self.wait_for_when_clickable(self._conteins_text_search)
         search_field.send_keys(search_parameter)
         search_field.send_keys(Keys.ENTER)
-        sleep(1)
+        sleep(2)
         self.wait_for_invisible(self._searching_process)
         result = self.wait_for_visible(self._search_result)
         if result.get_attribute('class') == 'no-results-hint':
