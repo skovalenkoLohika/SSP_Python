@@ -45,6 +45,9 @@ class IssuePage(Base):
             alert = self.driver.switch_to.alert
             alert.accept()
             sleep(1)
+        else:
+            self.wait_for_visible(self._issue_created)
+            self.wait_for_invisible(self._issue_created)
         return message_attrs
 
     def search_issue(self, search_parameter):
@@ -55,6 +58,7 @@ class IssuePage(Base):
         search_field.send_keys(search_parameter)
         search_field.send_keys(Keys.ENTER)
         sleep(1)
+        self.wait_for_invisible(self._searching_process)
         result = self.wait_for_visible(self._search_result)
         if result.get_attribute('class') == 'no-results-hint':
             return 0
@@ -72,6 +76,7 @@ class IssuePage(Base):
         summary_field.send_keys(Keys.ENTER)
         self.click_when_clickable(self._issue_priority)
         priority_field = self.wait_for_when_clickable(self._priority_field)
+        priority_field.click()
         priority_field.clear()
         priority_field.send_keys(priority)
         priority_field.send_keys(Keys.ENTER)

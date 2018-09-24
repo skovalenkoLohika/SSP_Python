@@ -39,11 +39,11 @@ class TestIssues(DriverSetup):
         assert expected_message in message['text']
 
 
-    # find one issue
+
     @pytest.mark.parametrize("summary, search_result", [
        ('Serg_Summary1', 1),
        ('Serg_Summary*', 4),
-        ('Serg111111', 0)])
+       ('Serg111111', 0)])
     def test_search_issue(self, summary, search_result):
         issue = IssuePage(self.driver)
         assert (issue.search_issue(summary) == search_result)
