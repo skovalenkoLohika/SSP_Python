@@ -91,6 +91,7 @@ class IssuePage(Base):
         self.wait_for_visible(self._assignee_suggestion)
         assignee_field.send_keys(Keys.ENTER)
         assignee_field.send_keys(Keys.ENTER)
+        self.wait_for_invisible(self._assignee_field)
         self.search_issue(summary)
         result.append(self.wait_for_visible(self._issue_summary).text)
         result.append(self.wait_for_visible(self._issue_priority).text)
