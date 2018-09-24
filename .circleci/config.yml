@@ -50,7 +50,7 @@ jobs:
           command: |
             . venv/bin/activate
             chmod -R 777 ./WebDrivers
-            pytest -vv tests/ui_test
+            pytest -v -l tests/ui_test
 
       - store_artifacts:
           path: test-reports
