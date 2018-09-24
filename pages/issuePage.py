@@ -12,7 +12,7 @@ class IssuePage(Base):
     _create_issue_submit = (By.ID, "create-issue-submit")
     _assignee = (By.ID, "assignee-field")
     _assignee_field =(By.CSS_SELECTOR, "input[id=assignee-field]")
-    _assignee_suggestion =(By.CSS_SELECTOR, "a[role=presentation]")
+    _assignee_suggestion =(By.CSS_SELECTOR, "input[aria-expanded=true]")
     _priority = (By.ID, "priority-field")
     _priority_field = (By.CSS_SELECTOR, "input[id=priority-field]")
     _error_message = (By.CSS_SELECTOR, "div[class=error]")
