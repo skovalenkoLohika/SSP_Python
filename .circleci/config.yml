@@ -58,6 +58,8 @@ jobs:
             . venv/bin/activate
             chmod -R 777 ./WebDrivers
             pytest -v -l tests/ui_test --alluredir=/tmp/my_allure_results
+            cd //tmp/my_allure_results
+            ls
 
       - run:
           name: generate report
