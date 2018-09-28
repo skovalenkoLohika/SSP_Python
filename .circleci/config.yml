@@ -59,7 +59,7 @@ jobs:
             chmod -R 777 ./WebDrivers
             pytest -v -l tests/ui_test/test_login.py --reruns 1 --alluredir=/tmp/my_allure_results
             ls
-            cd /allure-2.7.0/bin/
+            cd /allure-2.7.0/
             ls
 
       - run:
