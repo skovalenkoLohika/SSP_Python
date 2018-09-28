@@ -63,7 +63,12 @@ jobs:
           name: generate report
           command: |
             cd allure-2.7.0/
-            ./allure-2.7.0/bin/allure generate -c /tmp/my_allure_results -o /tmp/my_allure_report
+            ls
+            cd bin
+            ls
+            ./allure generate -c /tmp/my_allure_results -o /tmp/my_allure_report
+
+#            ./allure-2.7.0/bin/allure generate -c /tmp/my_allure_results -o /tmp/my_allure_report
 
 
 
