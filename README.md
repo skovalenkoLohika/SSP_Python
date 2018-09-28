@@ -1,0 +1,1 @@
+pytest -v tests/ui_test/test_login.py --alluredir=C:\\tmp\\my_allure_results

@@ -12,7 +12,8 @@ class DriverSetup:
         options.add_argument("--test-type")
         options.add_argument("start-maximized")
         if os.name == "nt":
-            driver_path = r"..\..\WebDrivers\chromedriver_win.exe"
+            # driver_path = r"..\..\WebDrivers\chromedriver_win.exe"
+            driver_path = "WebDrivers\chromedriver_win.exe"
         else:
             driver_path = "./WebDrivers/chromedriver_linux"
         try:
@@ -21,6 +22,3 @@ class DriverSetup:
         except WebDriverException:
             print("failed to start driver at " + driver_path)
         return self.driver
-
-
-

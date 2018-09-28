@@ -1,4 +1,5 @@
 import pytest
+import allure
 from tests.variables import *
 from tests.request_api import Api
 from pages.issuePage import IssuePage
@@ -8,6 +9,8 @@ from tests.JsonGenerator import JsonGenerator
 request = Api()
 
 
+@allure.title("Issue Tests")
+@pytest.mark.ua
 class TestIssues(DriverSetup):
 
     id_issue = []
@@ -23,9 +26,9 @@ class TestIssues(DriverSetup):
                 self.id_issue.append(response.json().get("key"))
 
 
-
-
    # with missing required fields## with parameter text length longer than supported
+    @allure.step
+    @allure.title("Create Issue")
     @pytest.mark.parametrize("summary, expected_message", [
         ('', "You must specify a summary of the issue."),
         ('SergSummary'*35, "Summary must be less than 255 characters."),
@@ -38,8 +41,8 @@ class TestIssues(DriverSetup):
             self.id_issue.append(message['data-issue-key'])
         assert expected_message in message['text']
 
-
-
+    @allure.step
+    @allure.title("Search Issue")
     @pytest.mark.parametrize("summary, search_result", [
        ('Serg_Summary1', 1),
        ('Serg_Summary*', 4),
@@ -48,6 +51,8 @@ class TestIssues(DriverSetup):
         issue = IssuePage(self.driver)
         assert (issue.search_issue(summary) == search_result)
 
+    @allure.step
+    @allure.title("Update Issue")
     def test_update_issue(self, search_issue="Serg_Summary1",
                          new_summary="Serg_Summary5",
                          new_priority='High',
