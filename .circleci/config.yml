@@ -60,7 +60,7 @@ jobs:
             pytest -v -l tests/ui_test/ --reruns 1 --alluredir=/tmp/my_allure_results
 
       - run:
-          name: generate report
+          name: generate allure report
           command: |
             ./allure-2.7.0/bin/allure generate -c /tmp/my_allure_results -o /tmp/my_allure_report
 
