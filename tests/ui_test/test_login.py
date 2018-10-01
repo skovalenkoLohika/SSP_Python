@@ -21,7 +21,7 @@ class TestLogin(DriverSetup):
     def test_login(self, username, password, expected_result):
         login = LoginPage(self.driver)
         result = login.login(username, password)
-        assert (result == expected_result)
+        assert (result == expected_result, 'Login failed, "create" button is not visible')
 
     def teardown_class(self):
         self.driver.close()

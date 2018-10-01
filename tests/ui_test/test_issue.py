@@ -39,7 +39,7 @@ class TestIssues(DriverSetup):
         print('message={}'.format(message))
         if message['data-issue-key'] is not None:
             self.id_issue.append(message['data-issue-key'])
-        assert expected_message in message['text']
+        assert expected_message in message['text'], 'Issue has not been created'
 
     @allure.step
     @allure.title("Search Issue")
@@ -49,7 +49,7 @@ class TestIssues(DriverSetup):
        ('Serg111111', 0)])
     def test_search_issue(self, summary, search_result):
         issue = IssuePage(self.driver)
-        assert (issue.search_issue(summary) == search_result)
+        assert issue.search_issue(summary) == search_result, 'Issue has not been found'
 
     @allure.step
     @allure.title("Update Issue")
@@ -61,7 +61,7 @@ class TestIssues(DriverSetup):
         result = issue.update_issue(search_issue, new_summary, new_priority, assignee)
         assert new_summary in result
         assert new_priority in result
-        assert assignee in result
+        assert assignee in result , 'Issue has not been updated'
 
     def teardown_class(self):
         if len(self.id_issue) > 0:
