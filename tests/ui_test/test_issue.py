@@ -9,7 +9,7 @@ from tests.JsonGenerator import JsonGenerator
 request = Api()
 
 
-@allure.title("Issue Tests")
+@allure.story("Issue Tests")
 @pytest.mark.ua
 class TestIssues(DriverSetup):
 
