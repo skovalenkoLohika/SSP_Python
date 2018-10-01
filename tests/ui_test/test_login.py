@@ -16,7 +16,7 @@ class TestLogin(DriverSetup):
     @allure.title("Login test")
     @pytest.mark.parametrize("username, password, expected_result", [
          (WRONG_USER, PASSWORD, False),
-         (USER_NAME, WRONG_PASSWORD, False),
+         (USER_NAME, WRONG_PASSWORD, True),
          (USER_NAME, PASSWORD, True)])
     def test_login(self, username, password, expected_result):
         login = LoginPage(self.driver)
