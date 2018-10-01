@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
+import allure
 
 from tests.base import Base
 
@@ -83,6 +84,9 @@ class IssuePage(Base):
         priority_field.send_keys(priority)
         priority_field.send_keys(Keys.ENTER)
         priority_field.send_keys(Keys.ENTER)
+        allure.attach(self.driver.get_screenshot_as_png(),
+                      name='update_issue',
+                      attachment_type=allure.attachment_type.PNG)
         self.wait_for_invisible(self._priority_field)
         self.click_when_clickable(self._issue_assignee)
         assignee_field = self.wait_for_when_clickable(self._assignee_field)
