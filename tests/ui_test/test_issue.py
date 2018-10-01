@@ -61,7 +61,7 @@ class TestIssues(DriverSetup):
         result = issue.update_issue(search_issue, new_summary, new_priority, assignee)
         assert new_summary in result
         assert new_priority in result
-        assert assignee in result , 'Issue has not been updated'
+        assert assignee in result, 'Issue has not been updated'
 
     def teardown_class(self):
         if len(self.id_issue) > 0:

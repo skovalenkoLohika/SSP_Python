@@ -12,16 +12,9 @@ class DriverSetup:
         options.add_argument('--ignore-certificate-errors')
         options.add_argument("--test-type")
         options.add_argument("start-maximized")
-        # if os.name == "nt":
-        #     # driver_path = r"..\..\WebDrivers\chromedriver_win.exe"
-        #     driver_path = "WebDrivers\chromedriver_win.exe"
-        # else:
-        #     driver_path = "./WebDrivers/chromedriver_linux"
         try:
             self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
-
-            # self.driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
             self.driver.get("http://jira.hillel.it:8080/login.jsp")
         except WebDriverException:
-            print("failed to start driver ")
+            print("failed to start driver")
         return self.driver
