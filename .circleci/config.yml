@@ -68,4 +68,3 @@ jobs:
 
       - store_artifacts:
           path: /tmp/my_allure_report
-          destination: allure_report
