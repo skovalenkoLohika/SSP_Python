@@ -63,8 +63,10 @@ jobs:
           name: generate report
           command: |
             ./allure-2.7.0/bin/allure generate -c /tmp/my_allure_results -o /tmp/my_allure_report
+          when: always
 
 
 
       - store_artifacts:
           path: /tmp/my_allure_report
+          destination: allure_report
