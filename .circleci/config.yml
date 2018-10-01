@@ -56,7 +56,6 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-#            chmod -R 777 ./WebDrivers
             pytest -v -l tests/ui_test/ --reruns 1 --alluredir=/tmp/my_allure_results
 
       - run:
