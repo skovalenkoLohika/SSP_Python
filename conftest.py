@@ -1,27 +1,15 @@
-# import os
-# from selenium.common.exceptions import WebDriverException
-# from selenium import webdriver
-# import pytest
-#
-#
-# @pytest.fixture(scope="class",  autouse=True)
-# def driver_setup(request):
-#     driver = None
-#     options = webdriver.ChromeOptions()
-#     options.add_argument('--ignore-certificate-errors')
-#     options.add_argument("--test-type")
-#     options.add_argument("start-maximized")
-#     if os.name == "nt":
-#         driver_path = "../../WebDrivers/chromedriver_win.exe"
-#     else:
-#         driver_path = "../../WebDrivers/chromedriver_linux"
-#     try:
-#         driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
-#         driver.get("http://jira.hillel.it:8080/login.jsp")
-#     except WebDriverException:
-#         print("failed to start driver at " + driver_path)
-#     request.cls.driver = driver
-#
-#     yield driver
-#     driver.close()
-#
+import pytest
+from selenium.webdriver.remote.webdriver import WebDriver
+import allure
+
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    driver: WebDriver = item.instance.driver
+    if driver is not None:
+        if rep.when in 'call' and rep.failed:
+            allure.attach(driver.get_screenshot_as_png(),
+                          name=item._pyfuncitem.name,
+                          attachment_type=allure.attachment_type.PNG)
