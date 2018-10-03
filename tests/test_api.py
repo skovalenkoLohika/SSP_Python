@@ -6,6 +6,7 @@ from tests.variables import *
 request = Api()
 
 
+@pytest.mark.api
 class TestApi:
 
     id_issue = []
