@@ -1,29 +1,21 @@
 import pytest
 import allure
-from tests.variables import *
 from tests.request_api import Api
 from pages.issuePage import IssuePage
-from pages.loginPage import LoginPage
 from tests.driver import DriverSetup
-from tests.JsonGenerator import JsonGenerator
+from tests.utils import Utils
 request = Api()
 
 
+@pytest.mark.usefixtures("issues")
 @allure.story("Issue Tests")
 @pytest.mark.ua
 class TestIssues(DriverSetup):
 
     id_issue = []
-    summary = ['Serg_Summary1', 'Serg_Summary2', 'Serg_Summary3']
 
     def setup_class(self):
-        self.driver = self.driver_setup(self)
-        login = LoginPage(self.driver)
-        login.login(USER_NAME, PASSWORD)
-        for i in self.summary:
-            response = request.create_issue(JsonGenerator.create_issue(i))
-            if response.status_code == 201:
-                self.id_issue.append(response.json().get("key"))
+        Utils.login_to_jira(self)
 
 
    # with missing required fields## with parameter text length longer than supported
