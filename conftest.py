@@ -25,6 +25,8 @@ def issues(request):
         response = request_api.create_issue(JsonGenerator.create_issue(i))
         if response.status_code == 201:
             id_issue.append(response.json().get("key"))
+        else:
+            print("Issue has not been created:"+response.json().text)
 
     def cleanup():
         if len(id_issue) > 0:
